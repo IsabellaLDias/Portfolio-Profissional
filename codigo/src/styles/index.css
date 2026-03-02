@@ -109,20 +109,41 @@ section[id] {
   background-color: #5c206d; /* Escurece um pouco o roxo */
   transform: translateY(-2px); /* Efeito de flutuação ao passar o mouse */
 }
-/* container do currículo (viewer de PDF) */
+/* overlay do modal do currículo, acima de todas as seções */
+.cv-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* container do currículo (viewer de PDF) - agora em modal centralizado */
 .curriculo-container {
-  margin-top: 24px;
+  position: relative;
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 8px 24px rgba(74, 44, 74, 0.12);
-  max-width: 800px;
-  max-height: 600px;
+  padding: 16px 24px 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  max-width: 900px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
-.curriculo-container .rpv-core__viewer {
-  height: 500px;
+.curriculo-body {
+  margin-top: 12px;
+  max-height: calc(80vh - 56px);
+  overflow: auto; /* rolagem apenas no conteúdo do PDF */
+}
+
+.curriculo-body .rpv-core__viewer {
+  flex: 1;
+  height: 100%;
 }
 
 .curriculo-container.loaded {
@@ -135,6 +156,23 @@ section[id] {
   margin-bottom: 8px;
   color: #7a2c8f;
   font-weight: 500;
+}
+
+.cv-close-button {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4A2c4A;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.cv-close-button:hover {
+  color: #7a2c8f;
 }
 /* about - fim */
 
@@ -455,7 +493,7 @@ section[id] {
   .about,
   .skills,
   .projects,
-  .guestbook,
+  .guestbook-section,
   .contact {
     padding: 80px 40px;
     gap: 40px;
@@ -470,6 +508,7 @@ section[id] {
   .about,
   .skills,
   .projects,
+  .guestbook-section,
   .contact {
     flex-direction: column;
     padding: 72px 24px;
@@ -496,6 +535,30 @@ section[id] {
 
   .footer {
     padding: 56px 16px;
+  }
+}
+
+/* Ajustes extras para telas muito pequenas (mobile) */
+@media (max-width: 480px) {
+  .about,
+  .skills,
+  .projects,
+  .guestbook-section,
+  .contact {
+    padding: 56px 16px;
+    gap: 24px;
+  }
+
+  .about-content h2,
+  .skills-left h2,
+  .project-content h2,
+  .guestbook-left h2,
+  .contact-left h2 {
+    font-size: 1.8rem;
+  }
+
+  .contact-left h3 {
+    font-size: 1.4rem;
   }
 }
 
@@ -652,7 +715,8 @@ section[id] {
   }
 
   .nav-links {
-    gap: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   .nav-links li {

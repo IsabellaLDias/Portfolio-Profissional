@@ -1,8 +1,17 @@
 import { useState, useEffect } from 'react';
 import laptop from "../../assets/images/laptop.png";
 
+// Fallback caso a API do GitHub não retorne dados
+const FALLBACK_SKILLS = [
+  { name: 'JavaScript', percent: 30 },
+  { name: 'TypeScript', percent: 15 },
+  { name: 'React', percent: 20 },
+  { name: 'HTML', percent: 15 },
+  { name: 'CSS', percent: 15 },
+  { name: 'Git', percent: 5 },
+];
+
 function Skills({ lang }) {
-  // Ajustado para skillsData para bater com o seu .map()
   const [skillsData, setSkillsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,6 +39,13 @@ function Skills({ lang }) {
         );
 
         const totalBytes = Object.values(languageStats).reduce((a, b) => a + b, 0);
+
+        // Se por algum motivo não houver dados, usa fallback
+        if (!totalBytes) {
+          setSkillsData(FALLBACK_SKILLS);
+          setLoading(false);
+          return;
+        }
         
         const formattedSkills = Object.entries(languageStats)
           .map(([name, value]) => ({
@@ -40,11 +56,11 @@ function Skills({ lang }) {
           .sort((a, b) => b.percent - a.percent)
           .slice(0, 12); 
 
-        // CORREÇÃO: Nome da função deve ser o mesmo do useState
-        setSkillsData(formattedSkills);
+        setSkillsData(formattedSkills.length ? formattedSkills : FALLBACK_SKILLS);
         setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados globais:", error);
+        setSkillsData(FALLBACK_SKILLS);
         setLoading(false);
       }
     };

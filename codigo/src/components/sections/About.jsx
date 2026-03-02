@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -17,12 +17,26 @@ function About({ lang }) {
   const containerRef = useRef(null)
   const defaultLayoutPluginInstance = defaultLayoutPlugin()
 
-  const cvLang = lang === 'en' ? 'en' : 'pt'
-  const fileUrl = `/cv-${cvLang}.pdf`
+  // Usa o mesmo arquivo de currículo para ambos os idiomas
+  const fileUrl = `/cv-pt.pdf`
 
   const handleDocumentLoad = () => {
     setIsLoaded(true)
   }
+
+  // Bloqueia o scroll da página quando o currículo estiver aberto
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+
+    if (showCv) {
+      const originalOverflow = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+
+      return () => {
+        document.body.style.overflow = originalOverflow
+      }
+    }
+  }, [showCv])
 
   return (
     <section id="about" className="about">
@@ -47,23 +61,35 @@ function About({ lang }) {
         >
           {buttonLabel}
         </button>
+      </div>
 
-        {showCv && (
+      {/* Modal do currículo em overlay, sem alterar o tamanho da seção About */}
+      {showCv && (
+        <div className="cv-modal-overlay">
           <div
             className={`curriculo-container ${isLoaded ? "loaded" : ""}`}
             ref={containerRef}
           >
-            {!isLoaded && <div className="spinner">Carregando PDF...</div>}
-            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
-              <Viewer
-                fileUrl={fileUrl}
-                plugins={[defaultLayoutPluginInstance]}
-                onDocumentLoad={handleDocumentLoad}
-              />
-            </Worker>
+            <button
+              type="button"
+              onClick={() => setShowCv(false)}
+              className="cv-close-button"
+            >
+              ✕
+            </button>
+            <div className="curriculo-body">
+              {!isLoaded && <div className="spinner">Carregando PDF...</div>}
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
+                <Viewer
+                  fileUrl={fileUrl}
+                  plugins={[defaultLayoutPluginInstance]}
+                  onDocumentLoad={handleDocumentLoad}
+                />
+              </Worker>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
       {/* Indicador de Scroll como botão */}
       <button
         type="button"

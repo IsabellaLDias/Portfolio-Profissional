@@ -85,7 +85,7 @@ const Home = ({ lang }) => {
 
 
       {/* --- 3D Spline (Lado Direito) --- */}
-      <div className="hidden md:flex absolute right-0 top-18 h-full w-[45%] z-20 flex items-center">
+      <div className="hidden md:flex absolute right-0 top-18 h-full w-[45%] z-20 flex items-center pointer-events-none">
         <iframe src='https://my.spline.design/miniroomartcopy-QaFR5Dmkgy0LIKyrxHerdd3c/' 
         frameborder='0' 
         width='100%' 
