@@ -86,14 +86,16 @@ const Home = ({ lang }) => {
 
       {/* --- 3D Spline (Lado Direito) --- */}
       <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-[45%] z-20 flex items-center overflow-hidden">
-        <spline-viewer
-          className="w-full h-full"
+        <iframe
+          src="https://my.spline.design/miniroomartcopy-2MaXldjr2OMEdmJ1lSu79dSe/?v=2"
+          frameBorder="0"
+          width="100%"
+          height="100%"
           style={{
             transform: 'scale(1.05) translateY(48px)',
             transformOrigin: 'center top',
           }}
-          url="https://prod.spline.design/zC5wrcmJ1X5bWaZw/scene.splinecode"
-        ></spline-viewer>
+        ></iframe>
       </div>
 
       {/* Indicador de Scroll como botão */}
