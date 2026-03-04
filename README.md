@@ -170,9 +170,18 @@ Esse processo cria os arquivos otimizados para produção.
 ---
 
 ## 🚀 Deploy
-O deploy ainda não foi realizado.
 
-Está previsto que a aplicação seja publicada utilizando a plataforma Vercel, que oferece suporte nativo a projetos desenvolvidos com Vite + React.
+O deploy do **Portifólio das Meninas** foi realizado na plataforma **Vercel**, atendendo aos requisitos de hospedagem gratuita em nuvem definidos para o projeto. O repositório está configurado para **Continuous Deployment (CD)**, onde cada atualização na branch principal dispara um novo build automático.
+
+### 🌐 Link de Acesso
+O sistema final, hospedado e funcional, pode ser acessado através do link abaixo:
+
+👉 **[portfolio-das-meninas.vercel.app](https://portfolio-das-meninas.vercel.app)**
+
+### ⚙️ Configurações de Produção
+* **Plataforma:** Vercel.
+* **Build Command:** `npm run build` para a geração dos arquivos estáticos otimizados.
+* **Framework:** Configurado para suportar a estrutura de diretórios e navegação implementada.
 
 ---
 
