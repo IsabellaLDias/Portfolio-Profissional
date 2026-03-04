@@ -1,7 +1,19 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from 'react-icons/fa';
 
 const Home = ({ lang }) => {
+  const [showRoom, setShowRoom] = useState(false);
+
+  useEffect(() => {
+    // Atraso pequeno para garantir que o conteúdo principal aparece antes da casinha 3D
+    const timer = setTimeout(() => {
+      setShowRoom(true);
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section id="home" className="relative w-full h-screen bg-lavender-main flex items-center">
 
@@ -84,19 +96,23 @@ const Home = ({ lang }) => {
       </div>
 
 
-      {/* --- 3D Spline (Lado Direito) --- */}
-      <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-[45%] z-20 flex items-center overflow-hidden">
-        <iframe
-          src="https://my.spline.design/miniroomartcopy-2MaXldjr2OMEdmJ1lSu79dSe/?v=2"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          style={{
-            transform: 'scale(1.05) translateY(48px)',
-            transformOrigin: 'center top',
-          }}
-        ></iframe>
-      </div>
+      {/* --- 3D Spline (Lado Direito) - carregamento preguiçoso --- */}
+      {showRoom && (
+        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-[45%] z-20 flex items-center overflow-hidden">
+          <iframe
+            src="https://my.spline.design/miniroomartcopy-2MaXldjr2OMEdmJ1lSu79dSe/?v=2"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            loading="lazy"
+            title="Casinha 3D do portfólio"
+            style={{
+              transform: 'scale(1.05) translateY(48px)',
+              transformOrigin: 'center top',
+            }}
+          ></iframe>
+        </div>
+      )}
 
       {/* Indicador de Scroll como botão */}
       <button

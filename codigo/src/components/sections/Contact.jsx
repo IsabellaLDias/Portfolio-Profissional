@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 
 function Contact({ lang }) {
   const form = useRef();
+  const [emailError, setEmailError] = useState('');
 
   const titleLeft = lang === 'pt' ? 'Contato' : 'Contact';
   const subtitleLeft = lang === 'pt' ? 'Mande uma mensagem.' : 'Drop me a line.';
@@ -14,8 +15,29 @@ function Contact({ lang }) {
   const buttonLabel = lang === 'pt' ? 'Enviar mensagem' : 'Send Message';
   const scrollLabel = lang === 'pt' ? 'Topo' : 'Top';
 
+  const invalidEmailMessage =
+    lang === 'pt'
+      ? 'Digite um e-mail válido.'
+      : 'Please enter a valid email address.';
+
+  const validateEmail = (value) => {
+    // Validação simples de formato
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(value);
+  };
+
   const sendEmail = (e) => {
     e.preventDefault();
+
+    const formEl = form.current;
+    const emailValue = formEl?.email?.value || '';
+
+    if (!validateEmail(emailValue)) {
+      setEmailError(invalidEmailMessage);
+      return;
+    }
+
+    setEmailError('');
 
     const serviceID = 'service_hj8348s';
     const templateID = 'template_g4mwunn';
@@ -59,7 +81,26 @@ function Contact({ lang }) {
             placeholder={placeholderEmail}
             name="email"
             required
+            onBlur={(e) => {
+              if (e.target.value && !validateEmail(e.target.value)) {
+                setEmailError(invalidEmailMessage);
+              } else {
+                setEmailError('');
+              }
+            }}
           />
+
+          {emailError && (
+            <span
+              style={{
+                color: '#e11d48',
+                fontSize: '0.8rem',
+                marginTop: '-8px',
+              }}
+            >
+              {emailError}
+            </span>
+          )}
 
           <textarea
             placeholder={placeholderMessage}

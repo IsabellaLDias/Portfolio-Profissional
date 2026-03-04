@@ -636,6 +636,11 @@ section[id] {
 }
 
 
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
 
 .language {
   font-size: 14px;
@@ -709,6 +714,50 @@ section[id] {
   width: 100%;
 }
 
+/* botão hamburguer (desktop hidden) */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: 16px;
+}
+
+.menu-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #4A2c4A;
+  border-radius: 999px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-line + .menu-line {
+  margin-top: 4px;
+}
+
+.navbar-open .menu-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.navbar-open .menu-line:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-open .menu-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* containers desktop x mobile */
+.nav-links-desktop {
+  display: flex;
+}
+
+.nav-links-mobile {
+  display: none;
+}
+
 @media (max-width: 800px) {
   :root {
     --navbar-height: 60px;
@@ -723,16 +772,43 @@ section[id] {
     font-size: 12px;
   }
 
-  .nav-links {
-    flex-wrap: wrap;
-    column-gap: 16px;
-    row-gap: 8px; /* espaço vertical entre linhas do menu */
+  /* no mobile o menu desktop some e entra o hamburguer */
+  .nav-links-desktop {
+    display: none;
   }
 
-  .nav-links li {
-    font-size: 12px;
-    padding-top: 4px;   /* espaço acima */
-    padding-bottom: 4px;/* espaço abaixo */
+  .menu-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-links-mobile {
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    list-style: none;
+    margin: 0;
+    padding: 12px 24px 16px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 8px 20px rgba(74, 44, 74, 0.12);
+  }
+
+  .nav-links-mobile-open {
+    display: flex;
+  }
+
+  .nav-links-mobile li {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 0;
   }
 }
 
