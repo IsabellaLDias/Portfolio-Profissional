@@ -85,7 +85,7 @@ const Home = ({ lang }) => {
 
 
       {/* --- 3D Spline (Lado Direito) --- */}
-      <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-[45%] z-20 flex items-center pointer-events-none overflow-hidden">
+      <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-[45%] z-20 flex items-center overflow-hidden">
         <spline-viewer
           className="w-full h-full"
           style={{
