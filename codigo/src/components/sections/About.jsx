@@ -20,8 +20,8 @@ function About({ lang }) {
 
   // Usa o currículo de acordo com o idioma selecionado
   const fileUrl = lang === 'pt'
-    ? `/CV - Isabella Dias (PT).pdf`
-    : `/CV - Isabella Dias (EN).pdf`
+    ? `./CV - Isabella Dias (PT).pdf`
+    : `./CV - Isabella Dias (EN).pdf`
 
   const handleDocumentLoad = () => {
     setIsLoaded(true)
