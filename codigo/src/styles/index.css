@@ -596,8 +596,6 @@ section[id] {
     gap: 32px;
   }
 
-  /* Garante que Contact e Guestbook ocupem toda a largura no mobile,
-     empilhando exatamente da mesma forma */
   .experiences-left,
   .experiences-right,
   .contact-left,
@@ -605,13 +603,11 @@ section[id] {
     width: 100%;
   }
 
-  /* ajusta alinhamento das colunas de skills quando empilhadas no mobile */
   .skills-right {
     margin-top: 24px;
     max-width: 100%;
   }
 
-  /* imagem de experiências ocupando largura total em telas menores */
   .experience-card {
     flex-direction: column;
     align-items: center;
@@ -633,25 +629,52 @@ section[id] {
     max-width: 100%;
   }
 
-  /* ajustes de SKILLS em telas menores (cards mais leves e com ícones menores) */
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    justify-items: center;
+    gap: 16px;
   }
 
   .skill-item {
+    min-height: 100px;
     padding: 12px 8px;
-    box-shadow: 0 4px 14px rgba(122, 44, 143, 0.08);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  .skill-icon,
-  .skill-icon-product {
+  .skill-icon {
     width: 40px;
     height: 40px;
   }
 
-  /* ajustes de PROJECTS em telas menores (menos rolagem e melhor uso de largura) */
+  .skill-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .skill-item p {
+    font-size: 12px;
+    text-align: center;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .skill-icon-product {
+    width: 40px;
+    height: 40px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .skills-grid-product {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .project-image img {
     width: 100%;
     height: auto;
@@ -686,13 +709,22 @@ section[id] {
     padding: 56px 16px;
   }
 
-  /* em telas médias/pequenas, altura automática para não cortar conteúdo */
   .projects {
     height: auto;
   }
+
+  .project-controls {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .projects button,
+  .experiences-section button,
+  .skills button {
+    bottom: 10px;
+  }
 }
 
-/* Ajustes extras para telas muito pequenas (mobile) */
 @media (max-width: 480px) {
   .about,
   .skills,
@@ -711,7 +743,6 @@ section[id] {
     font-size: 1.8rem;
   }
 
-  /* em celulares bem pequenos, diminui ainda mais o peso visual dos cards de skills */
   .skills-grid {
     gap: 16px;
   }
@@ -731,13 +762,8 @@ section[id] {
   }
 }
 
-/* contact - fim */
-
-
-/* footer - inicio */
-
 .footer {
-  background: #16051f; /* roxo bem escuro, próximo do preto */
+  background: #16051f;
   padding: 24px 16px;
   text-align: center;
   position: relative;
