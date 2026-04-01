@@ -30,28 +30,7 @@ function Skills({ lang }) {
     { namePt: 'Jira', nameEn: 'Jira', Icon: SiJirasoftware },
   ];
 
-  const productSkills = [
-    {
-      namePt: 'Product Ownership',
-      nameEn: 'Product Ownership',
-      short: 'PO',
-    },
-    {
-      namePt: 'Gestão de Backlog',
-      nameEn: 'Backlog Management',
-      short: 'Backlog',
-    },
-    {
-      namePt: 'User Stories & Critérios de Aceite',
-      nameEn: 'User Stories & Acceptance Criteria',
-      short: 'User Stories',
-    },
-    {
-      namePt: 'Planejamento de Sprint (Scrum/Kanban)',
-      nameEn: 'Sprint Planning (Scrum/Kanban)',
-      short: 'Scrum/Kanban',
-    },
-  ];
+
 
   return (
     <section id="skills" className="skills relative">
@@ -69,7 +48,7 @@ function Skills({ lang }) {
             return (
               <div key={label} className="skill-item">
                 <div className="skill-icon">
-                  <Icon size={34} />
+                  <Icon size={46} />
                 </div>
                 <p>{label}</p>
               </div>
@@ -78,24 +57,7 @@ function Skills({ lang }) {
         </div>
       </div>
 
-      <div className="skills-right">
-        <h3 className="skills-subtitle">
-          {lang === 'pt' ? 'Gestão de Produto' : 'Product Management'}
-        </h3>
-        <div className="skills-grid skills-grid-product">
-          {productSkills.map((skill) => {
-            const label = lang === 'pt' ? skill.namePt : skill.nameEn;
-            return (
-              <div key={label} className="skill-item skill-item-product">
-                <div className="skill-icon skill-icon-product">
-                  {skill.short}
-                </div>
-                <p>{label}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+
 
       <button
         type="button"

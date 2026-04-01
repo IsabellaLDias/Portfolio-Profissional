@@ -3,7 +3,6 @@ import { Worker, Viewer } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import profile from "../../assets/images/Isabella L. D. Santos.jpg";
 
 function About({ lang }) {
   const title = lang === 'pt' ? 'Sobre Mim' : 'About Me'
@@ -43,10 +42,6 @@ function About({ lang }) {
 
   return (
     <section id="about" className="about">
-      <div className="about-image">
-        <img src={profile} alt="Profile" />
-      </div>
-
       <div className="about-content">
         <h2>{title}</h2>
 
